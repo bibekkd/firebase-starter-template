@@ -4,11 +4,13 @@
 import { useState } from "react";
 import { signup, signInWithGoogle } from "@/lib/auth/auth";
 import { FirebaseError } from "firebase/app";
+import { useRouter } from "next/navigation";
 
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,7 +28,7 @@ export default function SignUp() {
 
     try {
       await signup({ email, password });
-      alert("Signed Up!");
+      router.push('/dashboard');
     } catch (err) {
       if (err instanceof FirebaseError) {
         setError(err.message);
@@ -39,7 +41,7 @@ export default function SignUp() {
   const handleGoogleSignIn = async () => {
     try {
       await signInWithGoogle();
-      alert("Signed up with Google!");
+      router.push('/dashboard');
     } catch (err) {
       if (err instanceof FirebaseError) {
         setError(err.message);

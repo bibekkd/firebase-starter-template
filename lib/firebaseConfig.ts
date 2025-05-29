@@ -21,6 +21,8 @@ const db = getFirestore(app);
 export { auth, db };
 console.log("Firebase initialized");
 console.log(process.env.FIREBASE_API_KEY!);
+
+
 /*
 
 // Import the functions you need from the SDKs you need
